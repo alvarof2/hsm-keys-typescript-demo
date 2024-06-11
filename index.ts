@@ -4,11 +4,11 @@ import { GcpKmsSigner } from "ethers-gcp-kms-signer";
 const kmsCredentialsBase = {
   projectId: "blockchaintestsglobaltestnet",
   locationId: "global",
-  keyRingId: "cel2-testnet",
-  keyVersion: "1",
+  keyRingId: "alvaro-test",
+  keyVersion: "5",
 };
 let kmsCredentials = [];
-const roles = ["admin", "batcher", "proposer", "sequencer"];
+const roles = ["import"];
 
 for (const role of roles) {
   kmsCredentials.push({
@@ -22,7 +22,7 @@ for (const kmsCredential of kmsCredentials) {
 }
 
 // From ethers, call providers.getDefaultProvider() to get a provider
-const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
+const provider = new ethers.providers.JsonRpcProvider("https://ethereum-holesky-rpc.publicnode.com");
 
 
 (async () => {
@@ -31,11 +31,12 @@ const provider = new ethers.providers.JsonRpcProvider("http://localhost:8545");
     signer = signer.connect(provider);
     const address = await signer.getAddress();
     console.log(`Address for ${kmsCredential.keyId}: ${address}`);
+
+    // const tx = await signer.sendTransaction({
+    //   to: "0x571ca978F1ACA28445c7d496A6F02B6a12D8a64a",
+    //   value: ethers.utils.parseEther("0.0005"),
+    // });
+    // console.log("Transaction:", tx);
   }
 
-  // const tx = await signer.sendTransaction({
-  //   to: "0xfCf982bb4015852e706100B14E21f947a5Bb718E",
-  //   value: ethers.utils.parseEther("0.001"),
-  // });
-  // console.log("Transaction:", tx);
 })();
