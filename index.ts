@@ -4,11 +4,11 @@ import { GcpKmsSigner } from "ethers-gcp-kms-signer";
 const kmsCredentialsBase = {
   projectId: "blockchaintestsglobaltestnet",
   locationId: "global",
-  keyRingId: "alvaro-test",
-  keyVersion: "5",
+  keyRingId: "super-empty-test",
+  keyVersion: "1",
 };
 let kmsCredentials = [];
-const roles = ["import"];
+const roles = ["super-empty-test-1"];
 
 for (const role of roles) {
   kmsCredentials.push({
@@ -33,7 +33,7 @@ const provider = new ethers.providers.JsonRpcProvider("https://ethereum-holesky-
     console.log(`Address for ${kmsCredential.keyId}: ${address}`);
 
     // const tx = await signer.sendTransaction({
-    //   to: "0x571ca978F1ACA28445c7d496A6F02B6a12D8a64a",
+    //   to: "0x7C058b64672AAE4931486EF7D2a57B5EB3A9163f",
     //   value: ethers.utils.parseEther("0.0005"),
     // });
     // console.log("Transaction:", tx);
